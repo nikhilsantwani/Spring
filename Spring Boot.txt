@@ -1,0 +1,126 @@
+#Spring Boot :-
+
+=====================
+
+#Main.java
+package com.progrank.main;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+
+@SpringBootApplication
+
+
+public class Main {
+
+    public static void main(String[] args) {
+      ConfigurableApplicationContext con = SpringApplication.run(Main.class, args);
+       
+       Person person = con.getBean(Person.class);
+       person.eat();
+       person.speak();
+    }
+}
+
+#Person.java
+package com.progrank.main;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Person {
+	@Autowired
+	Food food;
+	
+	public void speak() {
+		System.out.print("i can able to speak !!");
+	}
+	
+	public void eat() {
+		food.recipes();
+	}
+}
+
+# Config.java
+package com.progrank.main;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+
+public class Config {
+
+	@Bean
+	public Person person() {
+		return new Person();
+	}
+}
+
+#Food.java
+package com.progrank.main;
+
+import org.springframework.stereotype.Component;
+
+@Component
+
+
+public class Food {
+	public void recipes() {
+		System.out.println("Your Food is ready now you can eat !!");
+	}
+}
+---------------------------------------
+Main.java
+package com.progrank.main;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+
+public class Main {
+
+    public static void main(String[] args) {
+      ConfigurableApplicationContext con = SpringApplication.run(Main.class, args);
+       
+       Person person = con.getBean(Person.class);
+       person.eat();
+       person.speak();
+    }
+}
+
+Person.java
+package com.progrank.main;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Component;
+
+@Component
+
+public class Person {
+	@Autowired
+	Food food;
+	
+	public void speak() {
+		System.out.print("i can able to speak !!");
+	}
+	
+	public void eat() {
+		food.recipes();
+	}
+}
+
+Food.java
+package com.progrank.main;
+
+import org.springframework.stereotype.Component;
+
+@Component
+
+public class Food {
+	public void recipes() {
+		System.out.println("Your Food is ready now you can eat !");
+	}
+}
